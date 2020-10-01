@@ -5,6 +5,7 @@ const cards = document.querySelector(".cards");
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+console.log(axios.get("https://api.github.com/users/MichaelCBrister"));
 console.log(axios.get("https://api.github.com/users/MichaelCBrister/events"));
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -22,7 +23,6 @@ axios.get("https://api.github.com/users/MichaelCBrister")
   .then(pass => {
     const cardElement = createCard(pass.data);
     cards.appendChild(cardElement);
-    console.log(cards);
   });
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -48,7 +48,6 @@ followersArray.forEach(link => {
     .then(pass =>{
       const cardElement = createCard(pass.data);
       cards.appendChild(cardElement);
-      console.log(cards);
   });
 });
 /*
@@ -115,4 +114,32 @@ function createCard(gitCard){
     justsml
     luishrd
     bigknell
+*/
+
+
+/* STRETCH */
+/*
+const me = "https://api.github.com/users/MichaelCBrister";
+
+axios.get(me + "/events")
+  .then(pass => {
+    const activity = createGraph(pass.data);
+    cards.appendChild(activity);
+  });
+
+followersArray.forEach(link => {
+  axios.get(link + "/events")
+    .then(pass =>{
+      const activity = createGraph(pass.data);
+      cards.appendChild(activity);
+    });
+  });
+
+function createGraph(events) {
+  const userActivity = document.createElement("div");
+  userActivity.textContent = events.forEach(item => {
+    console.log(`${item.actor.login} had a ${item.type} on ${item.created_at}.`);
+  });
+  return userActivity;
+}
 */
